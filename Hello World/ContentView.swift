@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var scheme: String = ""
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
+            Text(scheme)
+                .foregroundColor(.red)
         }
+        .onAppear(perform: self.selectedScheme)
         .padding()
+    }
+    
+    func selectedScheme() {
+        #if Dev
+            scheme = "Dev"
+        #elseif QA
+            scheme = "QA"
+        #elseif UAT
+            scheme = "UAT"
+        #elseif Prod
+            scheme = "Prod"
+        #endif
     }
 }
 
